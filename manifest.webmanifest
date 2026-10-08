@@ -1,9 +1,9 @@
 {
-  "id": "/Lucci-s-Space-Run-V2/",
+  "id": "/lucci-space-race-2026/",
   "name": "Lucci's Space Race",
   "short_name": "Space Race",
   "description": "Lucci's Space Race - Gelu Inc.",
-  "start_url": "./",
+  "start_url": "./?app=2026",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
