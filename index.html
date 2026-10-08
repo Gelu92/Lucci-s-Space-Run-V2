@@ -1,13 +1,13 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Lucci's Space Race</title>
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#070a1b">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Space Race">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icon-192.png" type="image/png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);background:#070a1b}body{margin:0}</style>
+<title>Lucci's Space Race</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,700;1,700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -26,6 +26,7 @@
   --mono: 'JetBrains Mono', ui-monospace, monospace;
   color-scheme: dark;
 }
+[hidden] { display: none !important; }
 html { box-sizing: border-box; height: 100%; }
 *, *::before, *::after { box-sizing: inherit; }
 body {
@@ -82,14 +83,11 @@ button:focus-visible { outline: 2px solid var(--star); outline-offset: 3px; }
 
 .screen {
   position: absolute; inset: 0;
-  z-index: 20;
-  pointer-events: auto;
-  display: flex; flex-direction: column; justify-content: flex-end;
+  display: flex; flex-direction: column; justify-content: flex-start; overflow-y: auto; touch-action: pan-y;
   padding: 24px 16px 20px;
   background: linear-gradient(180deg, rgba(7,10,27,0) 8%, rgba(7,10,27,.86) 52%, rgba(7,10,27,.97) 100%);
 }
-.panel, .actions, #go, .ghost { position: relative; z-index: 21; pointer-events: auto; }
-.panel { display: flex; flex-direction: column; gap: 14px; width: 100%; max-width: 460px; min-width: 0; }
+.panel { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 460px; min-width: 0; margin-top: auto; flex: none; }
 .eyebrow { margin: 0; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--lane); font-weight: 500; }
 h1 {
   margin: 0; font-size: clamp(38px, 12vw, 76px); line-height: .9; font-weight: 700; font-style: italic;
@@ -117,7 +115,7 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
 }
 
 .shop {
-  position: absolute; inset: 0; z-index: 20; pointer-events: auto; display: flex; flex-direction: column; gap: 14px;
+  position: absolute; inset: 0; display: flex; flex-direction: column; gap: 14px;
   padding: 20px 16px 18px; background: rgba(7,10,27,.97);
 }
 .shop-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
@@ -153,7 +151,25 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
 .mission .bar { height: 5px; }
 .mission .bar i { background: var(--lane); }
 #alert { position: absolute; left: 0; right: 0; top: 0; height: 16%; pointer-events: none; opacity: 0; background: linear-gradient(180deg, rgba(255,77,106,.5), rgba(255,77,106,0)); }
+.ghost.gold { color: var(--star); border-color: rgba(255,212,94,.6); }
+.row3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.row3 .ghost { font-size: 12px; letter-spacing: .08em; padding: 13px 4px; }
+.sec-title { grid-column: 1 / -1; margin: 6px 0 0; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--lane); font-weight: 500; }
+.upg { grid-column: 1 / -1; }
+.upg-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.pips { display: flex; gap: 4px; }
+.pips i { width: 20px; height: 5px; background: rgba(255,255,255,.16); }
+.pips i.on { background: var(--star); }
+.ud { font-size: 13px; color: var(--muted); line-height: 1.3; }
+#tutor { position: absolute; left: 16px; right: 16px; top: 20%; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; pointer-events: none; }
+.tg { font-family: var(--mono); font-size: 60px; line-height: 1; font-weight: 700; color: var(--lane); }
+.tt { max-width: 320px; font-size: 17px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; line-height: 1.2; text-wrap: balance; text-shadow: 0 2px 10px rgba(7,10,27,.9); }
+#tutSkip { pointer-events: auto; margin-top: 4px; font: 500 11px var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); background: rgba(20,26,69,.7); border: 1px solid rgba(95,214,232,.3); border-radius: 4px; padding: 7px 12px; cursor: pointer; }
+@media (prefers-reduced-motion: no-preference) { .tg { animation: nudge 1.1s ease-in-out infinite; } }
+@keyframes nudge { 50% { transform: translateY(-6px); } }
 </style>
+</head>
+<body>
 
 <canvas id="cv" aria-label="Campo di gioco"></canvas>
 
@@ -164,13 +180,14 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
 </div>
 
 <div id="pw" hidden>
-  <div class="chip" id="chShield" style="--c:#5fd6e8" hidden><span>Scudo</span></div>
+  <div class="chip" id="chShield" style="--c:#5fd6e8" hidden><span id="shLbl">Scudo</span></div>
   <div class="chip" id="chMagnet" style="--c:#ff6b86" hidden><span>Magnete</span><div class="bar"><i id="bMagnet"></i></div></div>
   <div class="chip" id="chTurbo" style="--c:#ff9a5c" hidden><span>Turbo</span><div class="bar"><i id="bTurbo"></i></div></div>
 </div>
 
 <div id="banner"><span class="sec" id="bnSector"></span><span class="nm" id="bnName"></span></div>
 <div id="alert"></div>
+<div id="tutor" hidden><span class="tg" id="tutG"></span><span class="tt" id="tutT"></span><button id="tutSkip" type="button">Salta tutorial</button></div>
 
 <div id="screen" class="screen">
   <div class="panel">
@@ -185,16 +202,18 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
       <li><b>&darr;</b><span>Scorri giù per passare sotto quelle in volo</span></li>
     </ul>
     <p class="hint">Prendi le sfere in volo: scudo, magnete e turbo. Attento alle comete di traverso.</p>
+    <p class="hint" id="dailyInfo"></p>
     <div class="actions">
+      <button id="daily" class="ghost gold" type="button" hidden></button>
       <button id="go" type="button">Parti</button>
-      <div class="row2"><button id="hangar" class="ghost" type="button">Hangar</button><button id="missBtn" class="ghost" type="button">Missioni</button></div>
+      <div class="row3"><button id="hangar" class="ghost" type="button">Hangar</button><button id="missBtn" class="ghost" type="button">Missioni</button><button id="tutBtn" class="ghost" type="button">Tutorial</button></div>
     </div>
   </div>
 </div>
 
 <div id="shop" class="shop" hidden>
   <div class="shop-head">
-    <div><p class="eyebrow">Hangar</p><h2>Tute</h2></div>
+    <div><p class="eyebrow">Tute e potenziamenti</p><h2>Hangar</h2></div>
     <div class="bank"><span class="lbl">Le tue stelle</span><strong id="bank">0</strong></div>
   </div>
   <div class="shop-list" id="skinList"></div>
@@ -236,6 +255,7 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
   var shop = $('shop'), skinList = $('skinList'), elBank = $('bank'), shopBack = $('shopBack');
   var pauseBtn = $('pause'), pauseScr = $('pauseScr'), resumeBtn = $('resume'), restartBtn = $('restart'), alertEl = $('alert');
   var missNote = $('missNote'), missBtn = $('missBtn'), missionsScr = $('missionsScr'), missionList = $('missionList'), bank2 = $('bank2'), missBack = $('missBack');
+  var shLbl = $('shLbl'), tutor = $('tutor'), tutG = $('tutG'), tutTx = $('tutT'), tutSkip = $('tutSkip'), dailyBtn = $('daily'), dailyInfo = $('dailyInfo'), tutBtn = $('tutBtn');
 
   var TAU = Math.PI * 2;
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
@@ -256,9 +276,17 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
     return SKINS[0];
   }
 
+  /* ---------- potenziamenti ---------- */
+  var UPS = [
+    { k: 'shield', name: 'Scudo',   max: 2, prices: [100, 220],      desc: function (l) { return 'Resiste a ' + (1 + l) + (l === 0 ? ' colpo' : ' colpi'); } },
+    { k: 'magnet', name: 'Magnete', max: 3, prices: [80, 160, 280],  desc: function (l) { return 'Dura ' + (9 + 2 * l) + ' secondi'; } },
+    { k: 'turbo',  name: 'Turbo',   max: 3, prices: [80, 160, 280],  desc: function (l) { return 'Dura ' + (5 + l) + ' secondi'; } }
+  ];
+
   /* ---------- salvataggio ---------- */
   var SAVE_KEY = 'lucci-space-race-save';
   var best = 0, bank = 0, owned = ['classic'], skinId = 'classic', missions = null;
+  var ups = { shield: 0, magnet: 0, turbo: 0 }, daily = { last: '', streak: 0 }, tutDone = false;
   try {
     var raw = localStorage.getItem(SAVE_KEY);
     if (raw) {
@@ -267,11 +295,18 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
       if (Array.isArray(d.owned) && d.owned.length) owned = d.owned;
       if (d.skin) skinId = d.skin;
       if (Array.isArray(d.missions)) missions = d.missions;
+      if (d.ups) {
+        ['shield', 'magnet', 'turbo'].forEach(function (k) {
+          ups[k] = clamp(Math.floor(+d.ups[k] || 0), 0, k === 'shield' ? 2 : 3);
+        });
+      }
+      if (d.daily && typeof d.daily.last === 'string') daily = { last: d.daily.last, streak: Math.max(0, Math.floor(+d.daily.streak || 0)) };
+      tutDone = !!d.tut;
     }
   } catch (e) {}
   if (owned.indexOf(skinId) < 0) skinId = 'classic';
   function persist() {
-    try { localStorage.setItem(SAVE_KEY, JSON.stringify({ best: best, bank: bank, owned: owned, skin: skinId, missions: missions })); } catch (e) {}
+    try { localStorage.setItem(SAVE_KEY, JSON.stringify({ best: best, bank: bank, owned: owned, skin: skinId, missions: missions, ups: ups, daily: daily, tut: tutDone })); } catch (e) {}
   }
 
   /* ---------- missioni ---------- */
@@ -312,6 +347,39 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
     }
   }
   ensureMissions();
+
+  /* ---------- bonus giornaliero ---------- */
+  function dayKey(d) { return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+  function dailyCalc() {
+    var now = new Date(), today = dayKey(now);
+    if (daily.last === today) return { ready: false, streak: daily.streak, today: today };
+    var y = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+    var next = daily.last === dayKey(y) ? daily.streak + 1 : 1;
+    return { ready: true, streak: next, today: today, reward: 10 + 5 * (Math.min(next, 7) - 1) };
+  }
+  function refreshDaily(show) {
+    if (!show) { dailyBtn.hidden = true; dailyInfo.hidden = true; return; }
+    var d = dailyCalc();
+    dailyInfo.hidden = false;
+    if (d.ready) {
+      dailyBtn.hidden = false;
+      dailyBtn.textContent = 'Bonus giornaliero · +' + d.reward + ' ★';
+      dailyInfo.textContent = d.streak > 1 ? 'Giorno ' + d.streak + ' di fila. Più giorni di seguito, più stelle.' : 'Ritira le stelle di oggi. Torna ogni giorno per un premio più grande.';
+    } else {
+      dailyBtn.hidden = true;
+      dailyInfo.textContent = 'Bonus di oggi ritirato · ' + d.streak + (d.streak === 1 ? ' giorno' : ' giorni') + ' di fila. Torna domani.';
+    }
+  }
+  function claimDaily() {
+    var d = dailyCalc();
+    if (!d.ready) return;
+    bank += d.reward;
+    daily = { last: d.today, streak: d.streak };
+    persist();
+    beep(660, 0.3, 'triangle', 0.06, 1320);
+    buzz(30);
+    setScreen('menu');
+  }
 
   /* ---------- ambienti ---------- */
   var BIOMES = [
@@ -386,6 +454,7 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
   var speed = 8, dist = 0, stars = 0, travel = 0, spawnT = 1, deadT = 0, shake = 0, flash = 0, trailT = 0;
   var shield = false, magnet = 0, turbo = 0, grace = 0;
   var objs = [], parts = [], prevBest = 0;
+  var tut = false, tutI = 0, tutSpawned = false, tutStepT = 0, tutPause = 0, magMax = 9, turMax = 5;
   var paused = false, stormWarn = 0, stormT = 0, nextStorm = 30, stormSpawnT = 0, missDone = [];
   var run = { stars: 0, dist: 0, jumps: 0, slides: 0, shields: 0, magnets: 0, turbos: 0, smashes: 0 };
 
@@ -465,9 +534,9 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
   }
   function pick(kind) {
     var P = POW[kind];
-    if (kind === 'shield') { shield = true; run.shields++; }
-    else if (kind === 'magnet') { magnet = 9; run.magnets++; }
-    else { turbo = 5; run.turbos++; }
+    if (kind === 'shield') { shield = 1 + ups.shield; run.shields++; }
+    else if (kind === 'magnet') { magMax = 9 + 2 * ups.magnet; magnet = magMax; run.magnets++; }
+    else { turMax = 5 + ups.turbo; turbo = turMax; run.turbos++; }
     burst(X(px, 1), py - jumpH * U - U * 0.6, 18, [P.col, '#ffffff'], 200, 0.6);
     beep(520, 0.25, 'triangle', 0.06, 1100);
     buzz(30);
@@ -476,8 +545,9 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
     chShield.hidden = !shield;
     chMagnet.hidden = magnet <= 0;
     chTurbo.hidden = turbo <= 0;
-    if (magnet > 0) bMagnet.style.width = clamp(magnet / 9 * 100, 0, 100) + '%';
-    if (turbo > 0) bTurbo.style.width = clamp(turbo / 5 * 100, 0, 100) + '%';
+    if (shield) shLbl.textContent = 'Scudo' + (shield > 1 ? ' ×' + shield : '');
+    if (magnet > 0) bMagnet.style.width = clamp(magnet / magMax * 100, 0, 100) + '%';
+    if (turbo > 0) bTurbo.style.width = clamp(turbo / turMax * 100, 0, 100) + '%';
   }
 
   /* ---------- azioni ---------- */
@@ -501,6 +571,7 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
   function setScreen(mode) {
     elResult.hidden = false;
     missNote.hidden = true;
+    refreshDaily(mode === 'menu');
     if (mode === 'menu') {
       elEyebrow.textContent = 'Settore 1 · Cintura di asteroidi';
       elTitle.innerHTML = 'Lucci\'s<em>Space Race</em>';
@@ -523,7 +594,7 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
     pw.hidden = true;
   }
 
-  function start() {
+  function start(forceTut) {
     objs = []; parts = [];
     st = 'play'; lane = 0; px = 0; jumpH = 0; vy = 0; slideT = 0;
     speed = 10; dist = 0; stars = 0; spawnT = 1.1; deadT = 0; shake = 0; flash = 0; prevBest = best;
@@ -533,10 +604,14 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
     paused = false; pauseScr.hidden = true; missionsScr.hidden = true;
     stormWarn = 0; stormT = 0; nextStorm = rnd(28, 42); stormSpawnT = 0; missDone = [];
     alertEl.style.opacity = 0;
+    tut = forceTut === true || !tutDone; tutI = 0; tutSpawned = false; tutStepT = 0; tutPause = 0;
+    magMax = 9 + 2 * ups.magnet; turMax = 5 + ups.turbo;
+    tutor.hidden = !tut;
+    if (tut) { tutG.textContent = ''; tutTx.textContent = ''; }
     elStars.textContent = '0'; elDist.textContent = '0';
     screen.hidden = true; shop.hidden = true; hud.hidden = false; pw.hidden = false;
     updChips();
-    showBanner('Settore 1', BIOMES[0].name);
+    if (!tut) showBanner('Settore 1', BIOMES[0].name);
     beep(300, 0.25, 'triangle', 0.05, 700);
     try { if (navigator.wakeLock) navigator.wakeLock.request('screen').catch(function () {}); } catch (e) {}
   }
@@ -609,8 +684,33 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
   }
 
   function renderShop() {
+    var sc = skinList.scrollTop;
     elBank.textContent = bank;
     skinList.innerHTML = '';
+    var t1 = document.createElement('p'); t1.className = 'sec-title'; t1.textContent = 'Potenziamenti'; skinList.appendChild(t1);
+    UPS.forEach(function (u) {
+      var lv = ups[u.k], card = document.createElement('div');
+      card.className = 'skin upg';
+      var pips = '';
+      for (var pi = 0; pi < u.max; pi++) pips += '<i' + (pi < lv ? ' class="on"' : '') + '></i>';
+      card.innerHTML = '<div class="upg-top"><b>' + u.name + '</b><span class="pips">' + pips + '</span></div><span class="ud">' + u.desc(lv) + (lv < u.max ? ' → ' + u.desc(lv + 1) : '') + '</span>';
+      var ub = document.createElement('button'); ub.type = 'button';
+      if (lv >= u.max) { ub.textContent = 'Livello massimo'; ub.disabled = true; }
+      else {
+        var price = u.prices[lv];
+        ub.textContent = 'Migliora · ★ ' + price;
+        ub.disabled = bank < price;
+        ub.addEventListener('click', function () {
+          if (ups[u.k] >= u.max || bank < price) return;
+          bank -= price; ups[u.k]++; persist();
+          beep(660, 0.2, 'triangle', 0.06, 1100);
+          renderShop();
+        });
+      }
+      card.appendChild(ub);
+      skinList.appendChild(card);
+    });
+    var t2 = document.createElement('p'); t2.className = 'sec-title'; t2.textContent = 'Tute'; skinList.appendChild(t2);
     SKINS.forEach(function (sk) {
       var has = owned.indexOf(sk.id) >= 0, on = skinId === sk.id;
       var card = document.createElement('div');
@@ -642,6 +742,7 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
       pc.translate(56, 122); pc.scale(82, 82);
       paintAstronaut(pc, sk, { ph: 0, running: false, air: false, flame: 0.16 });
     });
+    skinList.scrollTop = sc;
   }
   function openShop() { renderShop(); shop.hidden = false; }
   function closeShop() { shop.hidden = true; setScreen(st === 'dead' ? 'dead' : 'menu'); }
@@ -663,6 +764,60 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
   function closeMissions() { missionsScr.hidden = true; }
   function pauseGame() { if (st !== 'play' || paused) return; paused = true; pauseScr.hidden = false; }
   function resumeGame() { if (!paused) return; paused = false; pauseScr.hidden = true; }
+
+  /* ---------- tutorial ---------- */
+  var TUT = [
+    { g: '→', t: 'Scorri a destra per cambiare corsia' },
+    { g: '←', t: 'Ora scorri a sinistra' },
+    { g: '↑', t: 'Scorri su per saltare le rocce basse' },
+    { g: '↓', t: 'Scorri giù per passare sotto le rocce in volo' },
+    { g: '★', t: 'Raccogli stelle e sfere. Buona corsa!' }
+  ];
+  function tutLive(type) {
+    var n = 0;
+    for (var i = 0; i < objs.length; i++) if (!objs[i].done && objs[i].type === type) n++;
+    return n;
+  }
+  function tutShow() {
+    var sp = TUT[tutI];
+    tutG.textContent = sp.g;
+    tutTx.textContent = (tutI + 1) + '/' + TUT.length + ' · ' + sp.t;
+  }
+  function tutFinish(won) {
+    tut = false; tutDone = true; tutor.hidden = true; persist();
+    spawnT = 1.4; stormT = 0;
+    if (won) showBanner('Tutorial finito', 'Via!');
+  }
+  function tutNext() {
+    beep(660, 0.15, 'triangle', 0.05, 990);
+    tutI++; tutSpawned = false; tutPause = 0.8;
+    if (tutI >= TUT.length) tutFinish(true);
+  }
+  function tutFail() {
+    for (var i = 0; i < objs.length; i++) if (objs[i].type === 'low' || objs[i].type === 'high') objs[i].done = true;
+    shake = reduce ? 0 : 8; flash = 0.5;
+    beep(200, 0.3, 'square', 0.06, 80); buzz(60);
+    tutSpawned = false; tutPause = 0.7;
+  }
+  function tutUpdate(dt) {
+    if (tutPause > 0) { tutPause -= dt; return; }
+    if (!tutSpawned) {
+      tutSpawned = true; tutStepT = 0; tutShow();
+      if (tutI === 0) starTrail(1, 14);
+      else if (tutI === 1) starTrail(-1, 14);
+      else if (tutI === 2) { objs.push(makeRock('low', -1, 24)); objs.push(makeRock('low', 0, 24)); objs.push(makeRock('low', 1, 24)); starTrail(0, 30); }
+      else if (tutI === 3) { objs.push(makeRock('high', -1, 24)); objs.push(makeRock('high', 0, 24)); objs.push(makeRock('high', 1, 24)); starTrail(0, 30); }
+      else { starTrail(-1, 12); starTrail(1, 18); objs.push({ type: 'pow', kind: 'shield', lane: 0, z: 26, done: false, ph: 0 }); }
+    }
+    tutStepT += dt;
+    var ok = false;
+    if (tutI === 0) ok = lane === 1 && tutStepT > 0.3;
+    else if (tutI === 1) ok = lane === -1 && tutStepT > 0.3;
+    else if (tutI === 2) ok = tutStepT > 1 && tutLive('low') === 0;
+    else if (tutI === 3) ok = tutStepT > 1 && tutLive('high') === 0;
+    else ok = tutStepT > 6;
+    if (ok) tutNext();
+  }
 
   /* ---------- aggiornamento ---------- */
   function update(dt) {
@@ -694,7 +849,7 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
       tm = turbo > 0 ? 1.8 : 1;
       var base = Math.min(26, 10 + dist / 45);
       speed += (base * tm - speed) * Math.min(1, dt * 3);
-      dist += speed * dt * 0.8;
+      if (!tut) dist += speed * dt * 0.8;
       var dm = Math.floor(dist);
       if (String(dm) !== elDist.textContent) elDist.textContent = dm;
 
@@ -705,7 +860,8 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
         beep(240, 0.5, 'sine', 0.05, 520);
       }
 
-      if (stormT > 0) {
+      if (tut) { tutUpdate(dt); }
+      else if (stormT > 0) {
         stormT -= dt;
         stormSpawnT -= dt * tm;
         if (stormSpawnT <= 0) { spawnStormRow(); stormSpawnT = 0.55; }
@@ -756,9 +912,10 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
           } else {
             var hit = o.type === 'big' || o.type === 'comet' || (o.type === 'low' && jumpH < 0.45) || (o.type === 'high' && slideT <= 0);
             if (hit) {
-              if (turbo > 0) smash(o);
+              if (tut) tutFail();
+              else if (turbo > 0) smash(o);
               else if (grace > 0) { /* invulnerabile */ }
-              else if (shield) { shield = false; grace = 1.3; smash(o); shake = reduce ? 0 : 7; beep(260, 0.3, 'square', 0.06, 90); buzz(60); }
+              else if (shield) { shield--; grace = 1.3; smash(o); shake = reduce ? 0 : 7; beep(260, 0.3, 'square', 0.06, 90); buzz(60); }
               else { crash(); break; }
             }
           }
@@ -1080,17 +1237,10 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
     else if (k === 'Enter' && !screen.hidden && shop.hidden && missionsScr.hidden) { start(); e.preventDefault(); }
   });
 
-  var lastStartTap = 0;
-  function startFromButton(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    var now = Date.now();
-    if (now - lastStartTap < 400) return;
-    lastStartTap = now;
-    start();
-  }
-  goBtn.addEventListener('click', startFromButton);
-  goBtn.addEventListener('touchend', startFromButton, { passive: false });
+  goBtn.addEventListener('click', function () { start(false); });
+  dailyBtn.addEventListener('click', claimDaily);
+  tutBtn.addEventListener('click', function () { start(true); });
+  tutSkip.addEventListener('click', function () { tutFinish(false); objs = []; });
   hangarBtn.addEventListener('click', openShop);
   shopBack.addEventListener('click', closeShop);
   missBtn.addEventListener('click', openMissions);
@@ -1111,4 +1261,5 @@ h1 em { display: block; font-style: italic; color: var(--ember); }
 })();
 </script>
 
-</body></html>
+</body>
+</html>
